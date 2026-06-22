@@ -35,7 +35,7 @@ def carga():
 def cantidad_titulos_a_registrar(datos):
     cantidad = ingresar_entero_no_negativo("Ingrese la cantidad de productos a registrar: ")
 
-    while cantidad <= 0:
+    while cantidad < 0:
         cantidad = ingresar_entero_no_negativo("Error. Ingrese una cantidad mayor a 0: ")
 
     return cantidad
@@ -443,6 +443,10 @@ def aplicar_cambio_atributo(opcion, indice, datos):
         stock[indice] = ingresar_entero_no_negativo("Ingrese el nuevo stock: ")
     elif opcion == "6":
         imprimir_importante(f"Modificando categorías para: {titulo[indice]}")
+
+        #aviso que va a reescribir las categorías anteriores, si quiere mantener alguna de las anteriores tiene que 
+        # volver a seleccionarla porque se va a mostrar el menú de categorías desde cero
+        imprimir_aviso("Las categorías anteriores se sobrescribirán. Si desea mantener alguna categoría, deberá seleccionarla nuevamente en el siguiente menú.")
         categoria[indice] = seleccionar_multiples_categorias(datos)
     elif opcion == "7":
         disponibilidad[indice] = ingresar_opcion_valida("Ingrese la nueva disponibilidad: ", opciones_disponibilidad)
@@ -758,6 +762,9 @@ def imprimir_error(mensaje):
 
 def imprimir_importante(mensaje):
     print(Fore.GREEN + Style.BRIGHT + mensaje)
+
+def imprimir_aviso(mensaje):
+    print(Fore.YELLOW + Style.BRIGHT + "[AVISO]" + Style.BRIGHT + mensaje)
 
 def imprimir_informacion(mensaje):
     print(Fore.WHITE + Style.BRIGHT +  mensaje)
